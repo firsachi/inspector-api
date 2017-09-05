@@ -1,43 +1,28 @@
 package ua.kiev.inspector_api.api;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.kiev.inspector.model.dao.DaoFactory;
-import ua.kiev.inspector.model.dao.InspectorTaskDao;
-import ua.kiev.inspector.model.entity.InspectorTask;
-import ua.kiev.inspector_api.model.UserPrincipalModel;
+import com.google.gson.Gson;
+
+import ua.kiev.inspector_api.service.InspectorTaskService;
 
 @RestController
 @RequestMapping(value="/api/", produces="text/plain;charset=UTF-8")
 public class Design {
 	
 	@Autowired
-	private DaoFactory daoFactory;
+	private InspectorTaskService inspectorTaskService;
+	
+	@Autowired
+	private Gson gson;
 	
 	@RequestMapping(value="objects")
 	public String getObjects(){
-		InspectorTaskDao inspectorTaskDao = daoFactory.createInspectorTaskDao();
-		JSONArray array = new JSONArray();	
-		UserPrincipalModel user = (UserPrincipalModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		for (InspectorTask inspectorTask : inspectorTaskDao.getAllRisoDoc(user.getUserId())){
-			JSONObject resultJson = new JSONObject();
-			try {
-				resultJson.put("idNumber", inspectorTask.getId());
-				resultJson.put("street", inspectorTask.getStreet());
-				resultJson.put("summary", inspectorTask);
-				resultJson.put("created", inspectorTask.getDateDoc());
-				array.put(resultJson);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-		return array.toString();
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		return gson.toJson(inspectorTaskService.fullTaskUser(username));
 	}
 	/*
 	@GetMapping(value="objects/{id}")
