@@ -47,7 +47,7 @@ public class UserPrincipalModel implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return user.getMail();
+		return user.getEmail();
 	}
 
 	@Override
