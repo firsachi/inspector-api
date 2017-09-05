@@ -1,8 +1,5 @@
 package ua.kiev.inspector_api.api;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +21,8 @@ public class Accessory {
 	@Autowired
 	private DaoFactory daoFactory;
 	
-	private Gson gson = new Gson();
+	@Autowired
+	private Gson gson;
 	
 	@RequestMapping(value = "districs")
 	private String getAllDistrics() {
