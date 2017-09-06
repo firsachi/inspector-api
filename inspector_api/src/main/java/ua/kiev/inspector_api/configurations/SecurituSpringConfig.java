@@ -27,9 +27,12 @@ public class SecurituSpringConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.exceptionHandling()
 			.and().authorizeRequests()
-			.antMatchers("/api/**").hasAuthority("USER")
+				.antMatchers("/api")
+				.authenticated()
 			.and()
 			.formLogin()
+			.usernameParameter("username")
+        	.passwordParameter("password")
 			.and()
 			.logout();
 	}
