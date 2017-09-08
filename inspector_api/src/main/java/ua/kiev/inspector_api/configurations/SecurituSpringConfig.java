@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.savedrequest.NullRequestCache;
 
 
 @Configuration
@@ -24,17 +25,13 @@ public class SecurituSpringConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.csrf().disable()
-			.exceptionHandling()
-			.and().authorizeRequests()
-				.antMatchers("/api")
-				.authenticated()
-			.and()
-			.formLogin()
-			.usernameParameter("username")
-        	.passwordParameter("password")
-			.and()
-			.logout();
+		.httpBasic().and()
+		.authorizeRequests()
+		.antMatchers("/").permitAll().anyRequest().authenticated().and()
+		.requestCache().requestCache(new NullRequestCache()).and()
+		//.antMatchers(HttpMethod.POST, "/inspector-api/").access("USER").and()
+		//.formLogin().and()
+		.csrf().disable();
 	}
 
 }

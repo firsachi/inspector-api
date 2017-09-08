@@ -2,7 +2,6 @@ package ua.kiev.inspector_api.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +14,7 @@ import ua.kiev.inspector.model.dao.InspectorStatusObjectDao;
 import ua.kiev.inspector.model.dao.InspectorTypeObjectDao;
 
 @RestController
-@RequestMapping(value="/api/", produces="text/plain;charset=UTF-8")
+@RequestMapping(value="/", produces="text/plain;charset=UTF-8")
 @Transactional
 public class Accessory {
 	
