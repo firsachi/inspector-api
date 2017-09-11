@@ -22,9 +22,9 @@ public class InspectorTaskService {
 	@Autowired
 	private TaskTransformer taskTransformer;
 	
-	public List<TaskModel> fullTaskUser(String username){
+	public List<TaskModel> fullTaskUser(String email){
 		InspectorTaskDao taskDao = daoFactory.createInspectorTaskDao();
-		List<TaskModel> resultLisr = taskDao.getListTask(username).stream()
+		List<TaskModel> resultLisr = taskDao.getListTask(email).stream()
 				.map(elment -> taskTransformer.entityToTaskModel(elment))
 				.collect(Collectors.toList());
 		return resultLisr;
@@ -32,7 +32,7 @@ public class InspectorTaskService {
 	
 	public CompleteTaskModel getTask(int taskId, UserPrincipalModel user) {
 		InspectorTaskDao taskDao = daoFactory.createInspectorTaskDao();
-		CompleteTaskModel model = taskTransformer.entityToCompleteTaskModel(taskDao.getByRispDoc(taskId, user.getUsername()));
+		CompleteTaskModel model = taskTransformer.entityToCompleteTaskModel(taskDao.byTask(taskId, user.getUsername()));
 		return model;
 	}
 }
