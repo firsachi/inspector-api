@@ -7,8 +7,6 @@ public class CompleteTaskModel extends TaskModel{
 	private String location;
 	private String lat;
 	private String lng;
-	private String photoURL;
-	private String photo;
 	private String usrNotes;
 	private String admNotes;
 	
@@ -50,22 +48,6 @@ public class CompleteTaskModel extends TaskModel{
 
 	public void setLng(String lng) {
 		this.lng = lng;
-	}
-
-	public String getPhotoURL() {
-		return photoURL;
-	}
-
-	public void setPhotoURL(String photoURL) {
-		this.photoURL = photoURL;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 
 	public String getUsrNotes() {

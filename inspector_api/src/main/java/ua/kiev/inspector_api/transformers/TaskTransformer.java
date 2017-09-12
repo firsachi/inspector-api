@@ -9,7 +9,7 @@ import ua.kiev.inspector_api.model.TaskModel;
 @Component
 public class TaskTransformer {
 	
-	private final String URL = "http://localhost:8080/inspector-api/api/images/";
+	private final String URL = "http://94.45.50.250:8080/inspector-api/images/";
 
 	public TaskModel entityToTaskModel(InspectorTask entity) {
 		TaskModel model = new TaskModel();
@@ -22,7 +22,6 @@ public class TaskTransformer {
 		model.setLocation(entity.getLocAdd());
 		model.setLat(entity.getY());
 		model.setLng(entity.getX());
-		model.setPhotoURL( URL + entity.getId());
 		model.setPhoto(entity.getFotop());
 		model.setUsrNotes(entity.getPrim());
 		model.setAdmNotes(entity.getAnswer());
@@ -34,6 +33,7 @@ public class TaskTransformer {
 		model.setStreet(entity.getStreet());
 		model.setCreated(entity.getDateDoc().toString());
 		model.setSummary(entity.getOpis());
+		model.setPhotoURL( URL + entity.getId());
 		return model;
 	}
 

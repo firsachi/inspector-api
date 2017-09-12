@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.savedrequest.NullRequestCache;
 
 
 @Configuration
@@ -28,10 +27,12 @@ public class SecurituSpringConfig extends WebSecurityConfigurerAdapter {
 		.httpBasic().and()
 		.authorizeRequests()
 		.antMatchers("/").permitAll().anyRequest().authenticated().and()
-		.requestCache().requestCache(new NullRequestCache()).and()
+		.formLogin().permitAll().and()
+		.httpBasic().and()
 		//.antMatchers(HttpMethod.POST, "/inspector-api/").access("USER").and()
 		//.formLogin().and()
-		.csrf().disable();
+		.csrf().disable()
+		.logout().logoutSuccessUrl("/");
 	}
 
 }

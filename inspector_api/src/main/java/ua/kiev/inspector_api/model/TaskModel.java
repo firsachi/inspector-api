@@ -6,6 +6,8 @@ public class TaskModel {
 	private String street;
 	private String summary;
 	private String created;
+	private String photoURL;
+	private String photo;
 	
 	public int getIdNumber() {
 		return idNumber;
@@ -31,5 +33,17 @@ public class TaskModel {
 	public void setCreated(String created) {
 		this.created = created;
 	}
-
+	public String getPhotoURL() {
+		return photoURL;
+	}
+	public void setPhotoURL(String photoURL) {
+		this.photoURL = photoURL;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
 }
